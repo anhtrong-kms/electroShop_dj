@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+{% include 'includes/head.html' %}
+
+<body>
+    <div class="ps-page">
+
+        {% include 'includes/header.html' %}
+        {% load static %}
+
+        <div class="ps-blog ps-blog--masonry">
+            <div class="container">
+                <ul class="ps-breadcrumb">
+                    <li class="ps-breadcrumb__item"><a href="index.html">Home</a></li>
+                    <li class="ps-breadcrumb__item active" aria-current="page">Blog</li>
+                </ul>
+                <h1 class="ps-blog__title">GearFast Blog</h1>
+                {% load static %}
+                <div class="ps-blog__content">
+                    <div class="row">
+                        {% for blog in blogs %}
+                        <div class="col-12 col-md-6 col-lg-4">
+                            <div class="ps-blog--latset">
+                                {% if blog.blog_image %}
+                                <div class="ps-blog__thumbnail">
+                                    <a href="{% url 'blog' %}">
+                                        <img src="{{ blog.blog_image.url }}" style="width: 395px; height: 220px" alt="alt">
+                                    </a>
+                                    <div class="ps-blog__badge">
+                                        <span class="ps-badge__item">GEARFASTSHOP</span>
+                                        <span class="ps-badge__item">STORE</span>
+                                        <span class="ps-badge__item">SALE</span>
+                                    </div>
+                                </div>
+                                {% endif %}
+                                <div class="ps-blog__content">
+                                    <div class="ps-blog__meta">
+                                        <span class="ps-blog__date">{{ blog.created_date }}</span>
+                                        <a class="ps-blog__author" href="#">GearFastShop Admin</a>
+                                    </div>
+                                    <a class="ps-blog__title" href="{% url 'blog' %}" style="margin-bottom: 0!important;">{{ blog.title }}</a>
+                                </div>
+                            </div>
+                            <div>
+                                <p class="ps-blog__desc">{{ blog.description }}</p>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <div class="ps-blog__button">
+                        <a class="ps-btn ps-btn--primary" href="#">Load more</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {% include 'includes/footer.html' %}
+
+    </div>
+
+    {% include 'includes/extended.html' %}
+    {% include 'includes/scripts.html' %}
+
+</body>
+
+</html>

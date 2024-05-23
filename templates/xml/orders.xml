@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+{% load humanize %}
+<orders>
+    {% for order in orders %}
+    <order>
+        <number>{{ order.order_number }}</number>
+        <firstname>{{ order.first_name }}</firstname>
+        <lastname>{{ order.last_name }}</lastname>
+        <email>{{ order.email }}</email>
+        {% if order.payment.amount_paid is not None %}
+            <payment>{{ order.payment.amount_paid|floatformat:"0"|intcomma }}</payment>
+        {% endif %}
+        <total>{{ order.order_tota|floatformat:"0"|intcomma }}</total>
+        {% if order.payment.amount_paid is not None %}
+            <status>Paid</status>
+        {% else %}
+            <status>Unpaid</status>
+        {% endif %}
+    </order>
+    {% endfor %}
+</orders>
